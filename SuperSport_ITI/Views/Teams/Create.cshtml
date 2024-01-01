@@ -1,0 +1,48 @@
+﻿@model Team
+
+<h1 class="alert alert-success text-center">Create Team</h1>
+
+<div class="row">
+    <img class="card col-6 rounded ms-2 " src="" id="teamImages" style="object-fit:contain" />
+    <form class="col-md-4" method="post" asp-action="CreateTeam" asp-controller="Teams" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <label asp-for="Name" class="form-label"></label>
+            <input type="text" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Description" class="form-label"></label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="TeamNationality" class="form-label"></label>
+            <input type="text" asp-for="TeamNationality" class="form-control" />
+            <span asp-validation-for="TeamNationality" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="EstablishmentDate" class="form-label"></label>
+            <input asp-for="EstablishmentDate" class="form-control" />
+            <span asp-validation-for="EstablishmentDate" class="text-danger"></span>
+
+        </div>
+        <div>
+            <label asp-for="ImagePath" class="form-label"></label>
+            <input asp-for="ImagePath" type="file" name="imageFormFile" id="imageFormFile" accept=".png , .jpg" class="form-control" onchange="SetImgUrl()" />
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Create</button>
+    </form>
+
+</div>
+<div>
+    <a asp-action="IndexTeam" asp-controller="Teams" class="btn btn-secondary mt-2">Back to List</a>
+
+</div>
+@section Scripts{
+    <script>
+        function SetImgUrl() {
+            document.getElementById("teamImages").src = window.URL.createObjectURL(document.getElementById("imageFormFile").files[0]);
+        }
+    </script>
+}

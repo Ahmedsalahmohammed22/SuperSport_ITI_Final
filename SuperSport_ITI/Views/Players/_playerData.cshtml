@@ -1,0 +1,44 @@
+﻿@{
+    Player player = (Player)ViewBag.CurrentData;
+}
+<div class="row  bg-success bg-opacity-25 shadow rounded-2 p-3 mb-5">
+    <dl class="row col-sm-6">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => player.PlayerName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => player.PlayerName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => player.PlayerPosition)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => player.PlayerPosition)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => player.PlayerNationality)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => player.PlayerNationality)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => player.PlayerNumber)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => player.PlayerNumber)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => player.BirthDatePlayer)
+        </dt>
+        <dd class="col-sm-9">
+            @Model.BirthDatePlayer.ToShortDateString()
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => player.team.Name)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => player.team.Name)
+        </dd>
+    </dl>
+    <img class="col-5 rounded-circle" src="@Html.DisplayFor(model => player.ImagePath)" style="object-fit:contain" />
+</div>

@@ -1,0 +1,44 @@
+﻿@{
+    Team team = (Team)ViewBag.CurrentData;
+}
+
+<div class="row bg-success bg-opacity-25 shadow rounded-2 p-3 mb-5">
+    <dl class="row col-sm-6">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => team.Name)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => team.Name)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => team.Description)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => team.Description)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => team.TeamNationality)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => team.TeamNationality)
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => team.EstablishmentDate)
+        </dt>
+        <dd class="col-sm-8">
+            @Model.EstablishmentDate.ToShortDateString()
+        </dd>
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => team.Players)
+        </dt>
+        <dd class="col-sm-8">
+            @foreach (var player in team.Players)
+            {
+                <ul>
+                    <li class="card-text">@player.PlayerName</li>
+                </ul>
+            }
+        </dd>
+    </dl>
+    <img class="col-5 rounded-circle" src="@Html.DisplayFor(model => team.ImagePath)" style="object-fit:contain" />
+</div>

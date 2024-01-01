@@ -1,0 +1,73 @@
+﻿@model Player
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center">Edit @Model.PlayerName</h1>
+
+<hr />
+<div class="row bg-success bg-opacity-25 shadow rounded-2 p-3 mb-5">
+    <img class="col-5 rounded-circle" src="@Model.ImagePath" id="playerImages" style="object-fit:contain ; width:400px ; height:400px" />
+
+    <div class="col-md-4">
+        <form asp-action="EditCurrent" asp-controller="Players" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ImagePath" />
+            <div class="form-group">
+                <label asp-for="PlayerName" class="control-label"></label>
+                <input asp-for="PlayerName" class="form-control" />
+                <span asp-validation-for="PlayerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerPosition" class="control-label"></label>
+                <input asp-for="PlayerPosition" class="form-control" />
+                <span asp-validation-for="PlayerPosition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerNationality" class="control-label"></label>
+                <input asp-for="PlayerNationality" class="form-control" />
+                <span asp-validation-for="PlayerNationality" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlayerNumber" class="control-label"></label>
+                <input asp-for="PlayerNumber" class="form-control" />
+                <span asp-validation-for="PlayerNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDatePlayer" class="control-label"></label>
+                <input asp-for="BirthDatePlayer" class="form-control" />
+                <span asp-validation-for="BirthDatePlayer" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="ImagePath"></label>
+                <input accept=".png , .jpg" type="file" asp-for="ImagePath" class="form-control" name="imgFormFile" id="imgFormFile" onchange="setImgUrl()" />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="TeamId"></label>
+                <select asp-for="TeamId" asp-items=@(new SelectList(ViewBag.AllTeams , "Id", "Name"))
+                        class="form-control">
+                    <option selected disabled>Select....</option>
+                </select>
+                <span asp-validation-for="TeamId" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-action="IndexPlayers">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        function setImgUrl() {
+            document.getElementById("playerImages").src = window.URL.createObjectURL(document.getElementById("imgFormFile").files[0]);
+        }
+    </script>
+}

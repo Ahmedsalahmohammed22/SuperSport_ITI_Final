@@ -1,0 +1,16 @@
+﻿@model Player
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details @Model.PlayerName</h1>
+
+<div>
+    <hr />
+    <partial name="_playerData" />
+</div>
+<div>
+    <a asp-action="GetEditView" class="btn btn-primary" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="IndexPlayers" class="btn btn-secondary">Back to List</a>
+</div>

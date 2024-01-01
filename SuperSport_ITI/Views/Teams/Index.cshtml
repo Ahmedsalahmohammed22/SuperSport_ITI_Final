@@ -1,0 +1,111 @@
+﻿@model IEnumerable<Team>
+
+<h1 class="text-center">Teams </h1>
+
+
+<div class="d-flex justify-content-between mb-2">
+    <a asp-controller="Teams" asp-action="CreateView" class="btn btn-success mb-1">Create New</a>
+    <form method="get" asp-controller="Teams" asp-action="IndexTeam">
+        <div class="input-group">
+            <input type="text" name="search" class="border-1 p-2 rounded-2" placeholder="search by Name..." value="@ViewBag.Search" />
+            <button type="submit" class="btn btn-secondary input-group-append"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+</div>
+
+<div class="bg-secondary shadow p-3 mb-5 rounded bg-opacity-75">
+    @if (Model.Count() > 0)
+    {
+        <table class="table-warning table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(t => t.Id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(t => t.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(t => t.EstablishmentDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(t => t.TeamNationality)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(t => t.ImagePath)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.EstablishmentDate.ToShortDateString()
+                        </td>
+                        <td>
+                            @item.TeamNationality
+                        </td>
+                        <td>
+                            <img src="@item.ImagePath" style="max-width:100px; height:100px" class="img-fluid">
+                        </td>
+                        <td>
+                            <a asp-action="EditView" class="btn btn-outline-primary" asp-route-id="@item.Id"><i class="bi bi-pencil-square me-2"></i>Edit</a>
+                            <a asp-action="DetailsTeam" class="btn btn-outline-warning" asp-route-id="@item.Id"><i class="bi bi-list-ul me-2"></i>Details</a>
+                            <a asp-action="DeleteView" class="btn btn-outline-danger" asp-route-id="@item.Id"><i class="bi bi-trash me-2"></i>Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1 class="alert alert-danger text-center">There is no Team to display.</h1>
+    }
+
+    @if (Model.Count() > 0)
+    {
+        <div class="container">
+
+
+            <div class="row ">
+
+
+                @foreach (var team in Model)
+                {
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card mt-2">
+                            <img src="@team.ImagePath" class="img-fluid" alt="player" style="margin:0 auto ; display:block ; height:200px">
+                            <div class="card-body">
+                                <h5 class="card-title">@team.Name</h5>
+                                <p class="card-text">@team.Description</p>
+                                <h5 class="card-subtitle">Players</h5>
+                                @foreach(var player in team.Players)
+                                {
+                                    <ul class="my-2">
+                                        <li class="card-text">@player.PlayerName</li>
+                                    </ul>
+                                }
+
+                                <a asp-action="DetailsTeam" asp-route-id="@team.Id" class="btn btn-primary mt-2">Show Details</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <h1 class="alert alert-danger">There is Team to display.</h1>
+    }
+</div>
+

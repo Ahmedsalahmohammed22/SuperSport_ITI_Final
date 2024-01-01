@@ -1,0 +1,79 @@
+﻿@model Player_Team
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1 class="display-4 text-center">Super Sport</h1>
+
+<div class="bg-secondary shadow p-3 mb-5 rounded bg-opacity-75">
+    <h3 class="text-light text-left">Last 5 Players</h3>
+    <table class="table-warning table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>
+                Player Name
+            </th>
+            <th>
+                Player Position
+            </th>
+            <th>
+                Player Number
+            </th>
+            <th>
+                Team
+            </th>
+            <th>
+                Image Path
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var player in Model.players)
+            {
+                <tr>
+                    <td>
+                        @player.PlayerName
+                    </td>
+                    <td>
+                        @player.PlayerPosition 
+                    </td>
+                    <td>
+                        @player.PlayerNumber 
+                    </td>
+                    <td>
+                        @player.team.Name
+                    </td>
+                    <td>
+                        <img src="@player.ImagePath" style="max-width:100px; height:100px" class="img-fluid">
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <h3 class="text-light text-left">Spain Teams</h3>
+    <div class="row">
+
+        @foreach (var team in Model.teams)
+        {
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card mt-2 ms-1">
+                    <img src="@team.ImagePath" class="img-fluid" alt="player" style="margin:0 auto ; display:block ; height:200px">
+                    <div class="card-body">
+                        <h5 class="card-title ">@team.Name</h5>
+                        <p class="card-text">@team.Description</p>
+                        <h4 class="card-text card-subtitle">players</h4>
+                        @foreach (var player in team.Players)
+                        {
+                            <ul class="my-2">
+                                <li class="card-text">@player.PlayerName</li>
+                            </ul>
+                        }
+
+                        <a asp-action="DetailsPlayer" asp-route-id="@team.Id" class="btn btn-primary mt-2">Show Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
